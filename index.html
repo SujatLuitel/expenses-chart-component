@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <title>Expenses chart component</title>
+</head>
+<body>
+
+  <div class="container">
+
+    <div class="current-balance">
+      <div class="balance">
+        <span>My balance</span>
+        <p>$921.48</p>
+      </div>
+      <img src="./images/logo.svg" alt="">
+    </div>
+
+    <div class="spent-container">
+      <h1>Spending - Last 7 days</h1>
+
+      <canvas id="myChart" class="my-chart"></canvas>
+  
+      <div class="total-exp">
+        <div class="expenditure">
+          <span>Total this month</span>
+          <p>$478.33</p>
+        </div>
+        <div class="last-month">
+          <span>+2.4%</span>
+          <p>from last month</p>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+<script>
+  let myChart = document.getElementById('myChart').getContext('2d');
+  let barChart = new Chart(myChart, {
+      type:'bar',
+      data:{
+          labels:['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'],
+          datasets:[{
+              label:'',
+              data:[
+                  17.45,
+                  34.91,
+                  52.36,
+                  31.07,
+                  23.39,
+                  43.28,
+                  25.48
+              ],
+              backgroundColor: [
+              'hsl(10, 79%, 65%)',
+              'hsl(10, 79%, 65%)',
+              'hsl(186, 34%, 60%)',
+              'hsl(10, 79%, 65%)',
+              'hsl(10, 79%, 65%)',
+              'hsl(10, 79%, 65%)',
+              'hsl(10, 79%, 65%)'
+              ],
+              borderRadius:5,
+              borderSkipped: false,
+              hoverBackgroundColor: [
+                'hsl(10, 81%, 79%)',
+                'hsl(10, 81%, 79%)',
+                'hsl(186, 49%, 79%)',
+                'hsl(10, 81%, 79%)',
+                'hsl(10, 81%, 79%)',
+                'hsl(10, 81%, 79%)',
+                'hsl(10, 81%, 79%)',
+              ],
+          }]
+      },
+      options: {
+        //making cursor pointer on hover
+        onHover: (event, chartElement) => {
+  event.native.target.style.cursor = chartElement[0] ? ' pointer' : 'default';
+},
+        scales: {
+          x: {
+            grid: {
+              drawBorder: false,
+              display: false
+            }
+          },
+          y: {
+            grid: {
+              drawBorder: false,
+              display: false
+            },
+            ticks: {
+              display: false
+            }
+          }
+        }
+      }
+  });
+</script>
+</body>
+</html>
